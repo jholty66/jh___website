@@ -1,0 +1,34 @@
+<!doctype html>
+<html>
+
+  <head>
+    <title>ZFS notes</title>
+  </head>
+
+  <body>
+    <h1>Create ZFS flesystem for Linux</h1>
+
+    <p>A ZFS pool combines the features of a volume manager and a file system.</p>
+    <p>A ZFS dataset is ...</p>
+
+    <ul>
+      <li>filesystem type: <code>Solaris Root (bf00)</code></li>
+      <li>pool creation (unencrypted): <code>zpool create -f -o ashift=12 -o cachefile=/tmp/zpool.cache -O normalization=formD -O compression=lz4 -m none -R /mnt/gentoo rpool</code> Where <code>$DISK1</code>, <code>$DISK2</code>, <code>$DISK3</code>, ...,  are the names of the disks.
+	<ul>
+	  <li><code>-f</code>: force creation, overwrite origional filestem if it exists.</li>
+	  <li><code>-o ashift=12</code>: sets the alignment shift to 4KiB. This is set once, this could be different depending on the disk type.</li>
+	  <li><code>-o chachefile=/tmp/zpool.cache</code>:Sets the location of the cachefile.</li>
+	  <li><code>-O normalization=formD</code>: do later</li>
+	  <li><code>-O compression=lz4</code>: use lz4 compression algorithm, list of availabe compression algorithms: <a href="https://openzfs.github.io/openzfs-docs/Performance%20and%20Tuning/Workload%20Tuning.html#compression">here</a></li>
+	  <li><code>-m nome</code>: Don't set a mountpoint for the storage pool. If this is set to a directory, the pool will automatically be mounted then when imported.</li>
+	  <li><code>rpool</code>: The name of the pool.</li>
+	</ul>
+    </ul>
+
+    <ul>
+      <li>https://wiki.archlinux.org/index.php/Install_Arch_Linux_on_ZFS</li>
+      <li>https://wiki.archlinux.org/index.php/ZFS</li>
+    </ul>
+  </body>
+
+</html>
