@@ -16,14 +16,13 @@
 		<pre>zpool create -f \
 	-o ashift=12 \
 	-O acltype=posixacl \
-	-O cachefile=/tmp/zpool.cache \
 	-O compression=lz4 \
 	-O normalization=formD \
 	-O relatime=on \
 	-O xattr=sa \
 	-m none \
 	-R /mnt/gentoo \
-	rpool</pre>
+	rpool /dev/sda</pre>
 		<ul>
 			<li><code>-f</code>: force creation, overwrite origional filestem if it exists.</li>
 			<li><code>-o ashift=12</code>: sets the alignment shift to 4KiB. This is set once, this could be different depending on the disk type.</li>
@@ -69,5 +68,9 @@
 		<li>https://wiki.archlinux.org/index.php/Install_Arch_Linux_on_ZFS</li>
 		<li>https://wiki.archlinux.org/index.php/ZFS</li>
 	</ul>
+	<h1>Resize</h1>
+	<h2>Increase</h2>
+	<h2>Decrease</h2>
+	<p>ZFS does not support decreasing pool size, pools can only be increased.  To "shrink" a pool, snapshot (backup) the existing pool, destroy it, then send that snapshot to a new small pool. See <a href="shrink_zfs_pool.html"/>How to shrink zfs pool.</a></p>
 	</body>
 </html>
