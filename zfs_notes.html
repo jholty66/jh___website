@@ -1,84 +1,73 @@
 <!doctype html>
 <html>
-
-  <head>
-    <title>ZFS notes</title>
-  </head>
-
-  <body>
-    <p>A ZFS pool combines the features of a volume manager and a file system.</p>
-    <p>A ZFS dataset is ...</p>
-
-    <h1>Create ZFS flesystem for Linux</h1>
-    <ul>
-      <li>filesystem type: <code>Solaris Root (bf00)</code></li>
-      <li>pool creation (unencrypted) where <code>$DISK1</code>, <code>$DISK2</code>, <code>$DISK3</code>, ...,  are the names of the disks.</li>
-    </ul>
-
-    <h2>Base command</h2>
-    <pre><code>zpool create -f \
-             -o ashift=12 \
-             -O acltype=posixacl \
-             -O cachefile=/tmp/zpool.cache \
-             -O compression=lz4 \
-             -O normalization=formD \
-             -O relatime=on \
-             -O xattr=sa \
-             -m none \
-             -R /mnt/gentoo \
-             rpool</code></pre>
-    <ul>
-      <li><code>-f</code>: force creation, overwrite origional filestem if it exists.</li>
-      <li><code>-o ashift=12</code>: sets the alignment shift to 4KiB. This is set once, this could be different depending on the disk type.</li>
-      <li><code>-o chachefile=/tmp/zpool.cache</code>:Sets the location of the cachefile.</li>
-      <li><code>-O normalization=formD</code>: do later</li>
-      <li><code>-O compression=lz4</code>: use lz4 compression algorithm, list of availabe compression algorithms: <a href="https://openzfs.github.io/openzfs-docs/Performance%20and%20Tuning/Workload%20Tuning.html#compression">here</a></li>
-      <li><code>-O xattr=sa</code>: "Setting xattr=sa vastly improves the performance of extended attributes. Only use this pools or datasets that will only be accessed by linux. See more at: <a href="https://openzfs.github.io/openzfs-docs/Getting%20Started/Debian/Debian%20Buster%20Root%20on%20ZFS.html#step-2-disk-formatting">Debian Buster Root on ZFS</a></li>
-      <li><code>-m nome</code>: Don't set a mountpoint for the storage pool. If this is set to a directory, the pool will automatically be mounted then when imported.</li>
-      <li><code>rpool</code>: The name of the pool.</li>
-    </ul>
-
-    <h2>Encryption</h2>
-
-    <p>Encryption can be done natively or using something else such as LUKS.</p>
-    
-    <p>For native encryption the command is pretty much the same base command, but with extra options for encryption. </p>
-
-<pre><code>zpool create -f \
-             -o ashift=12 \
-             -O acltype=posixacl \
-             -O cachefile=/tmp/zpool.cache \
-             -O compression=lz4 \
-             -O encryption=aes-256-gcm \
-             -O keyformat=passphrase
-             -O keylocation=prompt
-             -O normalization=formD \
-             -O relatime=on \
-             -O xattr=sa \
-             -m none \
-             -R /mnt/gentoo \
-             rpool</code></pre>
-
-<ul>
-  <li><code>-O encryption=aes-256-gcm</code>: Sets the encryption algorithm, this cannot be changed once the pool has been created. List of avialable encryption algorithms:</li>
-  <ul>
-    <li><code>aes-128-ccm</code>, <code>aes-192-ccm</code>, <code>aes-256-ccm</code></li>
-    <li><code>aes-128-gcm</code>, <code>aes-192-gcm</code>, <code></code>aes-256-gcm</li>
-  </ul>
-  <li><code>-O keyformat=passphrase</code>: Options are:</li>
-  <ul>
-    <li><code>raw</code></li>
-    <li><code>hex</code></li>
-    <li><code>passphrase</code></li>    
-  </ul>
-</ul>
-
-<p>Note that that the boot directory should be seperate from this zpool. This can be done by putting it on a seperate partion or pool. Another way would be creating an unencrypted zpool and then creating an unencrypted dataset for the boot directory and an encrypted dataset for the rest of the root file system.</p>
-
-<ul>
-  <li>https://wiki.archlinux.org/index.php/Install_Arch_Linux_on_ZFS</li>
-  <li>https://wiki.archlinux.org/index.php/ZFS</li>
-</ul>
-  </body>
-
+	<head>
+		<link rel="stylesheet" href="jh___.css" /link>
+		<title>ZFS notes</title>
+	</head>
+	<body>
+		<p>A ZFS pool combines the features of a volume manager and a file system.</p>
+		<p>A ZFS dataset is ...</p>
+		<h1>Create ZFS flesystem for Linux</h1>
+		<ul>
+			<li>filesystem type: <code>Solaris Root (bf00)</code></li>
+			<li>pool creation (unencrypted) where <code>$DISK1</code>, <code>$DISK2</code>, <code>$DISK3</code>, ...,  are the names of the disks.</li>
+		</ul>
+		<h2>Base command</h2>
+		<pre>zpool create -f \
+	-o ashift=12 \
+	-O acltype=posixacl \
+	-O cachefile=/tmp/zpool.cache \
+	-O compression=lz4 \
+	-O normalization=formD \
+	-O relatime=on \
+	-O xattr=sa \
+	-m none \
+	-R /mnt/gentoo \
+	rpool</pre>
+		<ul>
+			<li><code>-f</code>: force creation, overwrite origional filestem if it exists.</li>
+			<li><code>-o ashift=12</code>: sets the alignment shift to 4KiB. This is set once, this could be different depending on the disk type.</li>
+			<li><code>-o chachefile=/tmp/zpool.cache</code>:Sets the location of the cachefile.</li>
+			<li><code>-O normalization=formD</code>: do later</li>
+			<li><code>-O compression=lz4</code>: use lz4 compression algorithm, list of availabe compression algorithms: <a href="https://openzfs.github.io/openzfs-docs/Performance%20and%20Tuning/Workload%20Tuning.html#compression">here</a></li>
+			<li><code>-O xattr=sa</code>: "Setting xattr=sa vastly improves the performance of extended attributes. Only use this pools or datasets that will only be accessed by linux. See more at: <a href="https://openzfs.github.io/openzfs-docs/Getting%20Started/Debian/Debian%20Buster%20Root%20on%20ZFS.html#step-2-disk-formatting">Debian Buster Root on ZFS</a></li>
+			<li><code>-m nome</code>: Don't set a mountpoint for the storage pool. If this is set to a directory, the pool will automatically be mounted then when imported.</li>
+			<li><code>rpool</code>: The name of the pool.</li>
+		</ul>
+		<h2>Encryption</h2>
+		<p>Encryption can be done natively or using something else such as LUKS.</p>
+		<p>For native encryption the command is pretty much the same base command, but with extra options for encryption. </p>
+		<pre>zpool create -f \
+	-o ashift=12 \
+	-O acltype=posixacl \
+	-O cachefile=/tmp/zpool.cache \
+	-O compression=lz4 \
+	-O encryption=aes-256-gcm \
+	-O keyformat=passphrase
+	-O keylocation=prompt
+	-O normalization=formD \
+	-O relatime=on \
+	-O xattr=sa \
+	-m none \
+	-R /mnt/gentoo \
+	rpool</pre>
+		<ul>
+			<li><code>-O encryption=aes-256-gcm</code>: Sets the encryption algorithm, this cannot be changed once the pool has been created. List of avialable encryption algorithms:</li>
+			<ul>
+				<li><code>aes-128-ccm</code>, <code>aes-192-ccm</code>, <code>aes-256-ccm</code></li>
+				<li><code>aes-128-gcm</code>, <code>aes-192-gcm</code>, <code></code>aes-256-gcm</li>
+			</ul>
+			<li><code>-O keyformat=passphrase</code>: Options are:</li>
+			<ul>
+				<li><code>raw</code></li>
+				<li><code>hex</code></li>
+				<li><code>passphrase</code></li>
+		</ul>
+	</ul>
+	<p>Note that that the boot directory should be seperate from this zpool. This can be done by putting it on a seperate partion or pool. Another way would be creating an unencrypted zpool and then creating an unencrypted dataset for the boot directory and an encrypted dataset for the rest of the root file system.</p>
+	<ul>
+		<li>https://wiki.archlinux.org/index.php/Install_Arch_Linux_on_ZFS</li>
+		<li>https://wiki.archlinux.org/index.php/ZFS</li>
+	</ul>
+	</body>
 </html>
