@@ -7,20 +7,19 @@
 	<body>
 		<h1>Shrink zfs pool.</h1>
 		<p>Pools cannot decrease in size, only increase.  To "shrink" zpool, snapshot the old pool, send the snapshot to a tempary pool, destroy the old pool and replace with new pool.  Send the backup to the new pool.</p>
-		<p>To resize <code>rpool</code> (<code>30G</code>) to (<code>20G</code>).</p>
+		<p>To resize <code>rpool</code> (<tt>30G</tt>) to (<tt>20G</tt>).</p>
 		<pre>jh___@gentooVM ~ zpool list
 NAME    SIZE  ALLOC   FREE  CKPOINT  EXPANDSZ   FRAG    CAP  DEDUP    HEALTH  ALTROOT
-rpool     30G    15G    15G        -         -     0%    50%  1.00x    ONLINE  -
+rpool    30G    15G    15G        -         -     0%    50%  1.00x    ONLINE  -
 		</pre>
 		<pre>root@gentooVM /home/jh___ fdisk -l
 NAME        MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
 vda         259:0    0  50.0G  0 disk
 ├─vda1      259:1    0   550M  0 part /boot
 └─vda2      259:2    0  49.4G  0 part
-vdb         259:0    0  50.0G  0 disk
-		</pre>
+vdb         259:0    0  50.0G  0 disk</pre>
 		<p>Create tempary new pool on <code>/dev/vdb</code></p>
-		<pre>root@gentooVM zpool create -f
+		<pre>root@gentooVM /home/jh___ zpool create -f
 	-o ashift=12 \
 	-O acltype=posixacl \
 	-O compression=lz4 \
@@ -28,18 +27,16 @@ vdb         259:0    0  50.0G  0 disk
 	-O relatime=on \
 	-O xattr=sa \
 	-m none \
-	tpool /dev/vdb
-		</pre>
+	tpool /dev/vdb</pre>
 		<p>Send snapshot of old pool to new pool. More at <a href="zfs_snapshot">ZFS how to snaphot</a>. If this the root partitoin, change bootloader config so that the bootloader uses the correct disk.</p>
-		<pre>root@gentooVM zfs snaphot -r rpool@bak
-root@gentooVM zfs send -vR rpool@bak | zfs recieve -vFd tpool
-		</pre>
+		<pre>root@gentooVM /home/jh___ zfs snaphot -r rpool@bak
+root@gentooVM /home/jh___ zfs send -vR rpool@bak | zfs recieve -vFd tpool </pre>
 		<p>Reformat the old partition.</p>
-		<pre>root@gentooVM fdisk /dev/vda1</pre>
+		<pre>root@gentooVM /home/jh___ fdisk /dev/vda1</pre>
 		<p>Copy over the vtoc to my new disk</p>
-		<pre>root@gentooVM prtvtoc  /dev/vdb | fmthard -s - /dev/vda2</pre>
+		<pre>root@gentooVM /home/jh___ prtvtoc  /dev/vdb | fmthard -s - /dev/vda2</pre>
 		<p>Recreate rpool and send backup snapshot.</p>
-		<pre>root@gentooVM zpool create -f
+		<pre>root@gentooVM /home/jh___ zpool create -f
 	-o ashift=12 \
 	-O acltype=posixacl \
 	-O compression=lz4 \
@@ -48,8 +45,7 @@ root@gentooVM zfs send -vR rpool@bak | zfs recieve -vFd tpool
 	-O xattr=sa \
 	-m none \
 	rpool /dev/vda1
-root@gentooVM zfs snapshot -r tpool@bak
-root@gentooVM zfs send -vR tpool@bak | zfs receive -vFd rpool
-		</pre>
+root@gentooVM /home/jh___ zfs snapshot -r tpool@bak
+root@gentooVM /home/jh___ zfs send -vR tpool@bak | zfs receive -vFd rpool </pre>
 	</body>
 </html>
