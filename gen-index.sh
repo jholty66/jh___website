@@ -1,5 +1,4 @@
 #!/bin/sh
-mv index.html index.html.bak
 ls *html
 echo '<!doctype html>
 <html>
