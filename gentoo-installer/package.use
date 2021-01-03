@@ -1,3 +1,0 @@
-echo "sys-apps/systemd gnuefi cryptsetup" >> /etc/portage/package.use
-echo "sys-fs/cryptsetup luks1_default" >> /etc/portage/package.use
-echo "sys-kernel/dracut systemd device-mapper" /etc/portage/package.use
