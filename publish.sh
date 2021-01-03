@@ -2,6 +2,6 @@ cd $(dirname "$0")
 pwd
 ./gen-index.sh
 git add *html
-git commit -m $(date +%Y-%m-%d)
+git commit -m $(date +%Y-%m-%d)--sync-website
 git diff *html
 git push
