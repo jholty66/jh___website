@@ -1,4 +1,4 @@
 html { width:750px; margin-left:auto; margin-right:auto; }
 body { font-family: serif; }
 code,pre { background-color:#e6e6fa; }
-
+pre { white-space: pre-wrap !important; }
