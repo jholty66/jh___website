@@ -1,0 +1,23 @@
+<!doctype html>
+<html>
+	<head>
+		<link rel="stylesheet" href="./style.css" /link>
+		<title>ZFS linux root</title>
+	</head>
+	<body>
+		<h2><code>Failed to mount the real root device error</code></h2>
+		<p>This error occurs on ZFS datasets are mounted using fstab instead of natively and with SystemD init. <a href="https://github.com/archzfs/archzfs/issues/79">Can't get Arch to boot with zfs-linux 4.7.4-1 - Failed to mount the real root device · Issue #79 · archzfs/archzfs</a>. To fix:</p>
+		<ul>
+			<li>Change <code>local tab_file="${node}/etc/fstab"</code> to <code>local tab_file="/etc/fstab"</code> in <code>/usr/lib/bin/initcpio/hooks/zfs</code>. Or use this sed command.</li>
+		</ul>
+			<pre>sed -i 's/${node}\(\/etc\/fstab\)/\1' /usr/lib/bin/initcpio/hooks/zfs</pre>
+		<ul>
+			<li>If using Arch LInux, also modify the <code>FILES</code> varaible in <code>/etc/mkinitcpio.conf</code>.</li>
+			<li>Enable Systemd services</li>
+		</ul>
+			<pre>systemctl preset zfs-import-cache zfs-import-scan zfs-mount zfs-share zfs-zed zfs.target</pre>
+		<ul>
+			<li>Then regenrate ramdisk.</li>
+		</ul>
+	</body>
+</html>
