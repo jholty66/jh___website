@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+	<head>
+		<link rel="stylesheet" href="./style.css" /link>
+		<title>Emacs autoinsert</title>
+	</head>
+	<body>
+		<h1>Emacs autoinsert</h1>
+		<p>Write this in Emacs init file.</p>
+		<pre>(require 'autoinsert) (require 'skeleton)
+(define-skeleton -auto-insert-bash-skeleton "" "" "#!/bin/bash" \n \n _)
+(define-skeleton -auto-insert-elisp-skeleton "" "" ";; -*- lexical-binding: t; -*-" \n \n _)
+(define-skeleton -auto-insert-python-skeleton "" "" "#!/usr/bin/env python3.9" \n \n "from typing import *" \n \n _)
+(define-skeleton -auto-insert-sh-skeleton "" "" "~!/bin/sh" \n \n _)
+(setq auto-insert-query nil)
+(setq auto-insert-alist '(("\\.bash\\'" . -auto-insert-bash-skeleton)
+                          ("\\.el\\'" . -auto-insert-elisp-skeleton)
+                          ("\\.py\\'" . -auto-insert-python-skeleton)
+                          ("\\.sh\\'" . -auto-insert-sh-skeleton)))
+(auto-insert-mode 1)</pre>
+		<p>Or with <a href="https://github.com/jwiegley/use-package"><code>use-package</code></a>.</p>
+		<pre>(use-package autoinsert
+  :requires skeleton
+  :preface
+  (define-skeleton -auto-insert-bash-skeleton "" "" "#!/bin/bash" \n \n _)
+  (define-skeleton -auto-insert-elisp-skeleton "" "" ";; -*- lexical-binding: t; -*-" \n \n _)
+  (define-skeleton -auto-insert-python-skeleton "" "" "#!/usr/bin/env python3.9" \n \n "from typing import *" \n \n _)
+  (define-skeleton -auto-insert-sh-skeleton "" "" "~!/bin/sh" \n \n _)
+  :config
+  (setq auto-insert-query nil)
+  (setq auto-insert-alist '(("\\.bash\\'" . -auto-insert-bash-skeleton)
+                            ("\\.el\\'" . -auto-insert-elisp-skeleton)
+                            ("\\.py\\'" . -auto-insert-python-skeleton)
+                            ("\\.sh\\'" . -auto-insert-sh-skeleton)))
+  (auto-insert-mode 1))</pre>		
+		<ul>
+			<li><code>auto-insert-alist</code> is an associations list.</li>
+			<li>The cons is a regexp matching the file name</li>
+			<li>The cars can either be a file name string that will insert the contents of a file or a function. In this case the function calls a skeleton that insrts text into the new file.</li>
+		</ul>
+		<a href="https://www.gnu.org/software/emacs/manual/html_node/autotype/Autoinserting.html">auto-insert-mode - GNU.org</a>
+	</body>
+</html>

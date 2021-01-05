@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+	<head>
+		<link rel="stylesheet" href="./style.css" /link>
+		<title>Emacs backup file</title>
+	</head>
+	<body>
+		<h1>Emacs backup file</h1>
+		<p>Write this in Emacs init file.</p>
+		<pre>(defun -backup-file (file)
+  "Append the date YYYY-MM-DD to a copy of FILE
+FILE is the name of the file froms its absolute path."
+  (interactive (list (when (buffer-file-name) (buffer-file-name))))
+  (message file)
+  (let ((backup (concat (file-name-directory file) (format-time-string "%Y-%m-%d") "--" (file-name-nondirectory file) "~")))
+    (if (file-exists-p backup) (rename-file backup (concat "~/.local/share/Trash/files/" (file-name-nondirectory backup))) (copy-file file backup) (message (concat "Created: " backup)))))</pre>
+	</body>
+</html>
