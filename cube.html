@@ -9,6 +9,43 @@
         color: #000000;
         background-color: #ffffff;
       }
+      .custom {
+        /* (:background "#FFFF00") */
+        background-color: #FFFF00;
+      }
+      .custom-1 {
+        /* (:background "#FFA500") */
+        background-color: #FFA500;
+      }
+      .custom-2 {
+        /* (:background "#0000FF") */
+        background-color: #0000FF;
+      }
+      .custom-3 {
+        /* (:background "#FF0000") */
+        background-color: #FF0000;
+      }
+      .custom-4 {
+        /* (:background "#008000") */
+        background-color: #008000;
+      }
+      .custom-5 {
+        /* (:foreground "white") */
+        color: #ffffff;
+      }
+      .custom-6 {
+        /* (:background "#FFFFFF") */
+        background-color: #FFFFFF;
+      }
+      .custom-7 {
+        /* (:foreground "black") */
+        color: #000000;
+      }
+      .secondary-selection {
+        /* secondary-selection */
+        color: #093060;
+        background-color: #dde3f4;
+      }
       .tree-sitter-hl-faceXcomment {
         /* tree-sitter-hl-face:comment */
         color: #505050;
@@ -451,12 +488,12 @@ how many ayers they turn, not just wide moves, even for small puzzles like
         <span class="tree-sitter-hl-faceXkeyword">self</span>.<span class="tree-sitter-hl-faceXproperty">move_face</span>[<span class="tree-sitter-hl-faceXstring">'L'</span>] <span class="tree-sitter-hl-faceXoperator">=</span> <span class="tree-sitter-hl-faceXkeyword">self</span>.<span class="tree-sitter-hl-faceXproperty">adj_mat</span>[<span class="tree-sitter-hl-faceXkeyword">self</span>.<span class="tree-sitter-hl-faceXproperty">adj_mat</span>.<span class="tree-sitter-hl-faceXproperty"><span class="tree-sitter-hl-faceXmethodXcall">index</span></span>(move_face[<span class="tree-sitter-hl-faceXstring">'U'</span>] <span class="tree-sitter-hl-faceXoperator">+</span> <span class="tree-sitter-hl-faceXnumber">1</span>)]
 
     <span class="tree-sitter-hl-faceXvariable">scheme</span> <span class="tree-sitter-hl-faceXoperator">=</span> {
-       <span class="tree-sitter-hl-faceXnumber">0</span>: <span class="tree-sitter-hl-faceXstring">'FFFFFF'</span>,
-       <span class="tree-sitter-hl-faceXnumber">1</span>: <span class="tree-sitter-hl-faceXstring">'008000'</span>,
-       <span class="tree-sitter-hl-faceXnumber">2</span>: <span class="tree-sitter-hl-faceXstring">'FF0000'</span>,
-       <span class="tree-sitter-hl-faceXnumber">3</span>: <span class="tree-sitter-hl-faceXstring">'0000FF'</span>,
-       <span class="tree-sitter-hl-faceXnumber">4</span>: <span class="tree-sitter-hl-faceXstring">'FFA500'</span>,
-       <span class="tree-sitter-hl-faceXnumber">5</span>: <span class="tree-sitter-hl-faceXstring">'FFFF00:'</span>
+       <span class="tree-sitter-hl-faceXnumber">0</span>: <span class="tree-sitter-hl-faceXstring">'</span><span class="custom-6"><span class="custom-7">#FFFFFF</span></span><span class="tree-sitter-hl-faceXstring">'</span>,
+       <span class="tree-sitter-hl-faceXnumber">1</span>: <span class="tree-sitter-hl-faceXstring">'</span><span class="custom-4"><span class="custom-5">#008000</span></span><span class="tree-sitter-hl-faceXstring">'</span>,
+       <span class="tree-sitter-hl-faceXnumber">2</span>: <span class="tree-sitter-hl-faceXstring">'</span><span class="custom-3"><span class="custom-5">#FF0000</span></span><span class="tree-sitter-hl-faceXstring">'</span>,
+       <span class="tree-sitter-hl-faceXnumber">3</span>: <span class="tree-sitter-hl-faceXstring">'</span><span class="custom-2"><span class="custom-5">#0000FF</span></span><span class="tree-sitter-hl-faceXstring">'</span>,
+       <span class="tree-sitter-hl-faceXnumber">4</span>: <span class="tree-sitter-hl-faceXstring">'</span><span class="custom-1"><span class="custom-7">#FFA500</span></span><span class="tree-sitter-hl-faceXstring">'</span>,
+       <span class="tree-sitter-hl-faceXnumber">5</span>: <span class="tree-sitter-hl-faceXstring">'</span><span class="tree-sitter-hl-faceXstring"><span class="custom"><span class="custom-7">#FFFF00</span></span></span><span class="tree-sitter-hl-faceXstring">:'</span>
     }
 
 <span class="tree-sitter-hl-faceXkeyword">class</span> <span class="tree-sitter-hl-faceXconstructor"><span class="tree-sitter-hl-faceXtype">Octahedron</span></span>(<span class="tree-sitter-hl-faceXconstructor"><span class="tree-sitter-hl-faceXtypeXsuper">Solid</span></span>):
