@@ -12,7 +12,7 @@ for d in $(find . -not -path '*/\.*' -type d); do
 	<body>
 		<p>HTML</p>" > index.html
 	for html in $(ls *html); do
-		[ $html = "index.html" ] || sed -n "s/[\t]*<title>\(.*\)<\/title>/		<a href=$html>\1<\/a><br>/Ip" $html >> index.html
+		[ $html = "index.html" ] || sed -n "s/[\t]*<title>\(.*\)<\/title>/		<a href=$html>\1<\/a><br>/p" $html >> index.html
 	done
 	echo '		<p>PDF</p>' >> index.html
 	for pdf in $(ls *pdf); do
