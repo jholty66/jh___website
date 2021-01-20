@@ -1,0 +1,18 @@
+<!doctype html>
+<html>
+	<head>
+		<link rel="stylesheet" href="./style.css" /link>
+		<title>Index</title>
+	</head>
+	<body>
+		<h1>Share ZFS filesystem / dataset</h1>
+		<p>This can be done using either NFS or SMB.</p >
+		<h2>SMB</h2>
+		<p>Existing pool<p>
+		<pre># zfs set sharesmb=on tank</pre>
+		<p>Existing dataset.<p>
+		<pre># zfs set sharesmb=on tank/share</pre>
+		<p>New dataset<p>
+		<pre># zpool create tank -Osharesmb=on <i>options</i> tank</pre>
+	</body>
+</html>
